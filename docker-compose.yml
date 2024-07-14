@@ -1,0 +1,70 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_app1
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/memes/
+    environment:
+      POSTGRES_DB: memes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 143214
+    depends_on:
+      - db
+      - minio
+    networks:
+      - practice
+  web2:
+    build:
+      context: .
+      dockerfile: Dockerfile_app2
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/memes/
+    environment:
+      POSTGRES_DB: memes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 143214
+    depends_on:
+      - db
+      - minio
+    networks:
+      - practice
+  minio:
+    image: minio/minio
+    restart: unless-stopped
+    command: server --console-address ":9001" /data/
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    volumes:
+      - minio-storage:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - practice
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: memes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 143214
+    ports:
+      - 5432:5432
+    networks:
+      - practice
+
+networks:
+  practice:
+
+volumes:
+ minio-storage:
