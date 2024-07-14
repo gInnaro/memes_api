@@ -3,7 +3,7 @@ import psycopg2
 
 class MemesDB:
     def __init__(self):
-        self.conn = psycopg2.connect(user="postgres", password="143214", database="memes_db", host="memes-db-1", port="5432")
+        self.conn = psycopg2.connect(user="postgres", password="143214", database="memes_db", host="memes_api-db-1", port="5432")
         self.cursor = self.conn.cursor()
 
     def create_db(self):
@@ -58,7 +58,7 @@ class MemesDB:
 
 class AdminDB:
     def __init__(self):
-        self.conn = psycopg2.connect(user="postgres", password="143214", database="memes_db", host="memes-db-1", port="5432")
+        self.conn = psycopg2.connect(user="postgres", password="143214", database="memes_db", host="memes_api-db-1", port="5432")
         self.cursor = self.conn.cursor()
 
     def create_db(self):

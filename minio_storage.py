@@ -4,9 +4,9 @@ from minio.error import S3Error
 import requests
 import os
 
-minio_endpoint = "memes-minio-1:9000"
-minio_key = "DFCucjkun7UMehHRgmTm"
-minio_secret = "TNsKIejyzfL80GTPMHDO4UxfhDXlJe0WhAd8WYbg"
+minio_endpoint = "memes_api-minio-1:9000"
+minio_key = "YFEYv4VRncc0rPSEvLbo"
+minio_secret = "wKXcFRlrxcEwz19x3VTwfAMiUjysThqek23BPYKE"
 minio_bucket_name = "memes"
 
 class Minio_Memes:
